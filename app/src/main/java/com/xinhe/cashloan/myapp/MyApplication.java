@@ -18,7 +18,7 @@ import java.util.Map;
 
 import cn.jpush.android.api.JPushInterface;
 
-/**
+/**你好
  * Created by tantan on 2017/7/7.
  */
 
