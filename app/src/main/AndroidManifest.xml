@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.xinhe.cashloan">
+
+    <!-- 网络权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 在SDCard中创建与删除文件权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <!-- 网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 储存 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 读取 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- wifi状态 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 拍照 -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- 位置 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name="com.xinhe.cashloan.myapp.MyApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/logo"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
+        <activity
+            android:name="com.xinhe.cashloan.activity.LauncherActivity"
+            android:theme="@style/Theme.AppStartLoad">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.xinhe.cashloan.activity.MainActivity" />
+        <activity android:name="com.xinhe.cashloan.activity.WebViewActivity" />
+        <activity android:name="com.xinhe.cashloan.activity.ProductListActivity" />
+        <activity android:name="com.xinhe.cashloan.activity.LoginActivity"
+            android:theme="@style/Theme.Login"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity android:name="com.xinhe.cashloan.activity.GuideActivity" />
+
+        //下载  针对7.0添加代码
+        <service android:name="com.xinhe.cashloan.biz.update.UpdateService"/>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.update_app.file_provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/update_app_path"/>
+        </provider>
+
+
+        //极光
+        <service android:name="cn.jpush.android.service.PushService"
+            android:process=":multiprocess"
+            tools:node="replace" >
+
+        </service>
+
+        //友盟
+        <meta-data android:value="57870cbb67e58e332a000858" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="jifeng" android:name="UMENG_CHANNEL"/>
+
+
+
+    </application>
+
+</manifest>

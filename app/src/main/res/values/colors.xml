@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f6f6f6</color>
+    <color name="colorPrimaryDark">#f6f6f6</color>
+    <color name="dark">#000000</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+    <color name="white">#ffffff</color>
+
+    <color name="text_color_00">#000000</color>
+    <color name="text_color_huang">#f9c600</color>
+    <color name="text_color_32">#323232</color>
+    <color name="text_color_64">#646464</color>
+    <color name="text_color_79">#797979</color>
+    <color name="text_color_0058f9">#0058f9</color>
+    <color name="text_color_00dff9">#00dff9</color>
+    <color name="text_color_b3">#b3b3b3</color>
+    <color name="text_color_red">#ff3333</color>
+    <color name="text_color_66">#666666</color>
+    <color name="text_color_ef">#efefef</color>
+
+
+
+
+    <color name="line_color_cb">#cbcbcb</color>
+
+
+
+
+    <color name="bg_color_blue">#669cfe</color>
+    <color name="bg_color_f9">#f9f9f9</color>
+    <color name="bg_color_f7">#f7f7f7</color>
+    <color name="bg_color_ff">#ffffff</color>
+    <color name="bg_color_da">#dadada</color>
+    <color name="bg_color_d7">#d7d7d7</color>
+    <color name="bg_color_99">#999999</color>
+    <color name="bg_color_e8">#e8e8e8</color>
+    <color name="bg_color_btn">#D50000</color>
+    <color name="bg_color_ce">#cecece</color>
+
+</resources>

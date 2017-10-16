@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+                <item name="colorPrimary">@color/colorPrimary</item>
+                <item name="colorPrimaryDark">#9E9E9E</item>
+                <item name="colorAccent">@color/colorAccent</item>
+                <item name="windowActionBar">false</item>
+                <item name="windowNoTitle">true</item>
+        </style>
+
+        <style name="Theme.AppStartLoad" parent="AppTheme">
+                <item name="android:windowIsTranslucent">true</item>
+                <item name="android:windowNoTitle">true</item>
+                <item name="android:windowTranslucentStatus">true</item>
+        </style>
+
+        <style name="Theme.Login" parent="AppTheme">
+                <item name="android:windowTranslucentStatus">true</item>
+                <item name="android:windowBackground">@mipmap/login_bg</item>
+                <item name="android:windowNoTitle">true</item>
+                <item name="android:windowIsTranslucent">true</item>
+                <item name="android:backgroundDimEnabled">true</item><!-- 模糊 -->
+        </style>
+
+</resources>

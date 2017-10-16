@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@color/bg_color_ff">
+
+    <ImageView
+        android:id="@+id/show_loan_iv"
+        android:layout_width="@dimen/length_30"
+        android:layout_height="@dimen/length_30"
+        android:layout_centerVertical="true"
+        android:src="@mipmap/logo"
+        android:layout_marginRight="@dimen/length_5"
+        />
+
+    <TextView
+        android:id="@+id/show_loan_tv1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color_00"
+        android:textSize="@dimen/size_13"
+        android:text="零用钱-高通过率"
+        android:layout_toRightOf="@+id/show_loan_iv"
+        android:layout_marginTop="@dimen/length_3"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@+id/show_loan_iv"
+        android:layout_below="@+id/show_loan_tv1"
+        android:layout_marginTop="@dimen/length_3"
+        >
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:id="@+id/new_product_vvp_item_tv1"-->
+            <!--android:textSize="@dimen/size_12"-->
+            <!--android:textColor="@color/text_color_32"-->
+            <!--/>-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/new_product_vvp_item_tv2"
+            android:textSize="@dimen/size_11"
+            android:textColor="@color/text_color_red"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/new_product_vvp_item_tv3"
+            android:textSize="@dimen/size_11"
+            android:textColor="@color/text_color_66"
+            android:text="今日借款"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/new_product_vvp_item_tv4"
+            android:textSize="@dimen/size_11"
+            android:textColor="@color/text_color_red"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/new_product_vvp_item_tv5"
+            android:textSize="@dimen/size_11"
+            android:textColor="@color/text_color_32"
+            android:text="已到账"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>

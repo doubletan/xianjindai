@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/bg_color_ff"
+    android:descendantFocusability="blocksDescendants" >
+
+    <com.xinhe.cashloan.view.pullableview.PullToRefreshLayout
+        android:id="@+id/new_refresh_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <include layout="@layout/refresh_head" />
+
+        <com.xinhe.cashloan.view.pullableview.PullableRecycleView
+            android:id="@+id/new_fragment_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+
+        </com.xinhe.cashloan.view.pullableview.PullableRecycleView>
+        <include layout="@layout/load_more" />
+    </com.xinhe.cashloan.view.pullableview.PullToRefreshLayout>
+
+</LinearLayout>

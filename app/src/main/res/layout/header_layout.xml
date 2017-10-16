@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <cn.bingoogolapple.bgabanner.BGABanner
+        android:id="@+id/new_fragment_banner"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        style="@style/BannerDefaultStyle"
+        app:banner_isNeedShowIndicatorOnOnlyOnePage="true"
+        app:banner_pointDrawable="@drawable/point_selector"
+        app:banner_pointAutoPlayAble="true"
+        app:banner_pointContainerBackground="@android:color/transparent"
+        app:banner_transitionEffect="defaultEffect"
+        >
+    </cn.bingoogolapple.bgabanner.BGABanner>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        >
+        <com.xinhe.cashloan.view.VerticalViewPager
+            android:id="@+id/new_fragment_vvp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/length_10">
+
+        </com.xinhe.cashloan.view.VerticalViewPager>
+        <TextView
+            android:id="@+id/new_fragment_loan_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="今日已有166857人申请"
+            android:textSize="@dimen/size_11"
+            android:textColor="@color/text_color_red"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/length_10"
+            android:layout_marginTop="8.5dp"
+            />
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/length_10"
+        android:layout_centerVertical="true"
+        android:background="@color/text_color_ef"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="41dp" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <TextView
+                android:id="@+id/main_classification_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="分类专题"
+                android:textColor="@color/text_color_00"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/main_classification_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@+id/main_classification_tv1"
+                android:text="BEST"
+                android:textColor="#dc8a42"
+                android:textSize="14sp"
+                android:typeface="sans" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/main_classification_gv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center"
+        android:horizontalSpacing="15dp"
+        android:listSelector="#ffffff"
+        android:numColumns="auto_fit"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="10dp" >
+    </GridView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/length_10"
+        android:layout_centerVertical="true"
+        android:background="@color/text_color_ef"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="41dp" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <TextView
+                android:id="@+id/main_creditcard_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="热门推荐"
+                android:textColor="@color/text_color_00"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/main_creditcard_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@+id/main_creditcard_tv1"
+                android:text="HOT"
+                android:textColor="#42dca7"
+                android:textSize="14sp"
+                android:typeface="sans" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/main_rv"
+        android:layout_width="match_parent"
+        android:layout_height="76dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="4dp"
+        android:background="@null"
+        android:scrollbars="none" >
+    </android.support.v7.widget.RecyclerView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/length_10"
+        android:layout_centerVertical="true"
+        android:background="@color/text_color_ef"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="41dp" >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <TextView
+                android:id="@+id/main_new_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="新品上线"
+                android:textColor="@color/text_color_00"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/main_new_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@+id/main_new_tv1"
+                android:text="NEW"
+                android:textColor="#f90000"
+                android:textSize="14sp"
+                android:typeface="sans" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

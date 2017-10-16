@@ -1,0 +1,135 @@
+package com.xinhe.cashloan.view;
+
+import android.content.Context;
+import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
+import android.view.MotionEvent;
+import android.view.View;
+
+public class VerticalViewPager extends ViewPager{
+
+
+
+    public VerticalViewPager(Context context) {
+        super(context);
+        init();
+    }
+
+    public VerticalViewPager(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+
+    private void init() {
+        // The majority of the magic happens here
+        setPageTransformer(true, new VerticalPageTransformer());
+        // The easiest way to get rid of the overscroll drawing that happens on the left and right
+        setOverScrollMode(OVER_SCROLL_NEVER);
+    }
+
+    private class VerticalPageTransformer implements PageTransformer {
+
+        @Override
+        public void transformPage(View view, float position) {
+
+            if (position < -1) { // [-Infinity,-1)
+                // This page is way off-screen to the left.
+                view.setAlpha(0);
+
+            } else if (position <= 1) { // [-1,1]
+                view.setAlpha(1);
+
+                // Counteract the default slide transition
+                view.setTranslationX(view.getWidth() * -position);
+
+                //set Y position to swipe in from top
+                float yPosition = position * view.getHeight();
+                view.setTranslationY(yPosition);
+
+            } else { // (1,+Infinity]
+                // This page is way off-screen to the right.
+                view.setAlpha(0);
+            }
+        }
+    }
+
+    /**
+     * Swaps the X and Y coordinates of your touch event.
+     */
+    private MotionEvent swapXY(MotionEvent ev) {
+        float width = getWidth();
+        float height = getHeight();
+
+        float newX = (ev.getY() / height) * width;
+        float newY = (ev.getX() / width) * height;
+
+        ev.setLocation(newX, newY);
+
+        return ev;
+    }
+
+//    @Override
+//    public boolean onInterceptTouchEvent(MotionEvent ev){
+//        boolean intercepted = super.onInterceptTouchEvent(swapXY(ev));
+//        swapXY(ev); // return touch coordinates to original reference frame for any child views
+//        return intercepted;
+//    }
+//
+//    @Override
+//    public boolean onTouchEvent(MotionEvent ev) {
+//        return super.onTouchEvent(swapXY(ev));
+//    }
+
+    /**
+     * 以下代码设置不可滑动
+     */
+
+    private boolean isScroll;
+    /**
+     * 1.dispatchTouchEvent一般情况不做处理
+     *,如果修改了默认的返回值,子孩子都无法收到事件
+     */
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        return super.dispatchTouchEvent(ev);   // return true;不行
+    }
+    /**
+     * 是否拦截
+     * 拦截:会走到自己的onTouchEvent方法里面来
+     * 不拦截:事件传递给子孩子
+     */
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        // return false;//可行,不拦截事件,
+        // return true;//不行,孩子无法处理事件
+        //return super.onInterceptTouchEvent(ev);//不行,会有细微移动
+        if (isScroll){
+            return super.onInterceptTouchEvent(ev);
+        }else{
+            return false;
+        }
+    }
+    /**
+     * 是否消费事件
+     * 消费:事件就结束
+     * 不消费:往父控件传
+     */
+    @Override
+    public boolean onTouchEvent(MotionEvent ev) {
+        //return false;// 可行,不消费,传给父控件
+        //return true;// 可行,消费,拦截事件
+        //super.onTouchEvent(ev); //不行,
+        //虽然onInterceptTouchEvent中拦截了,
+        //但是如果viewpage里面子控件不是viewgroup,还是会调用这个方法.
+        if (isScroll){
+            return super.onTouchEvent(ev);
+        }else {
+            return true;// 可行,消费,拦截事件
+        }
+    }
+    public void setScroll(boolean scroll) {
+        isScroll = scroll;
+    }
+
+
+}

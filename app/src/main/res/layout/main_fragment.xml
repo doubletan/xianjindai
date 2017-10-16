@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main_fragment"
+    android:orientation="vertical"
+    android:background="@color/bg_color_ff"
+    >
+
+    <LinearLayout
+        android:id="@+id/main_fragment_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/length_44"
+        android:background="@color/colorPrimary"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/size_18"
+            android:textColor="@color/text_color_32"
+            android:text="贷款大全"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <include layout="@layout/line_da"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/length_25"
+        android:background="#eaf1ff"
+        >
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            >
+            <ImageView
+                android:id="@+id/main_fragment_tip_iv"
+                android:layout_width="@dimen/length_13"
+                android:layout_height="@dimen/length_13"
+                android:src="@mipmap/tip"
+                android:layout_centerVertical="true"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="申请3款以上产品通过率更高"
+                android:textSize="@dimen/size_11"
+                android:textColor="@color/bg_color_blue"
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/main_fragment_tip_iv"
+                android:layout_marginLeft="@dimen/length_3"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/length_40"
+        android:background="@color/bg_color_ff"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal"
+            >
+
+            <RelativeLayout
+                android:id="@+id/main_fragment_rl1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/main_fragment_tv1"
+                    android:textColor="@color/text_color_huang"
+                    android:textSize="@dimen/size_14"
+                    android:text="推荐"
+                    android:layout_centerInParent="true"
+                    />
+                <ImageView
+                    android:id="@+id/main_fragment_iv1"
+                    android:layout_width="11dp"
+                    android:layout_height="6dp"
+                    android:src="@mipmap/main_fragment1"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@+id/main_fragment_tv1"
+                    android:layout_marginLeft="3dp"
+                    />
+
+            </RelativeLayout>
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="20dp"
+                android:background="@color/bg_color_da"
+                >
+
+            </View>
+            <RelativeLayout
+                android:id="@+id/main_fragment_rl2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/main_fragment_tv2"
+                    android:textColor="@color/text_color_32"
+                    android:textSize="@dimen/size_14"
+                    android:text="极速"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@color/bg_color_ff"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/length_40"
+                android:background="@color/bg_color_f7">
+
+                <View
+                    android:layout_width="@dimen/length_3"
+                    android:layout_height="@dimen/length_18"
+                    android:layout_marginLeft="@dimen/length_10"
+                    android:layout_centerVertical="true"
+                    android:background="@color/text_color_huang"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/size_12"
+                    android:textColor="@color/text_color_64"
+                    android:layout_marginLeft="@dimen/length_18"
+                    android:layout_centerVertical="true"
+                    android:text="产品列表"/>
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/main_fragment_rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <include layout="@layout/product_choose_pop"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

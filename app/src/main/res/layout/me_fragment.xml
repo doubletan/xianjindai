@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color_ff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/me_fragment_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/length_44"
+        android:background="@color/colorPrimary">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="信用卡"
+            android:textColor="@color/text_color_32"
+            android:textSize="@dimen/size_18" />
+    </RelativeLayout>
+
+    <include layout="@layout/line_da"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/length_40"
+            android:background="@color/bg_color_f7">
+
+            <View
+                android:layout_width="@dimen/length_3"
+                android:layout_height="@dimen/length_18"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/length_10"
+                android:background="@color/text_color_huang" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/length_18"
+                android:text="产品列表"
+                android:textColor="@color/text_color_64"
+                android:textSize="@dimen/size_12" />
+        </RelativeLayout>
+
+        <com.xinhe.cashloan.view.pullableview.PullToRefreshLayout
+            android:id="@+id/new_refresh_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <include layout="@layout/refresh_head" />
+
+            <com.xinhe.cashloan.view.pullableview.PullableListView
+                android:id="@+id/new_fragment_lv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"></com.xinhe.cashloan.view.pullableview.PullableListView>
+
+
+            <include layout="@layout/load_more" />
+        </com.xinhe.cashloan.view.pullableview.PullToRefreshLayout>
+    </LinearLayout>
+</LinearLayout>

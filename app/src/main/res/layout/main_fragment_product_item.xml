@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/bg_color_ff"
+    android:background="@drawable/product_item_selector"
+    card_view:cardElevation="0dp"
+
+
+    app:cardElevation="0px"
+    app:cardMaxElevation="2px"
+    app:cardUseCompatPadding="false"
+    app:contentPaddingBottom="-20dp"
+    app:contentPaddingTop="-20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        >
+        <com.itheima.roundedimageview.RoundedImageView
+            android:id="@+id/product_item_iv"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/length_10"
+            android:layout_centerVertical="true"
+            android:elevation="2dp"
+            android:scaleType="fitCenter"
+            app:riv_border_width="0dip"
+            app:riv_border_color="#BDBDBD"
+            app:riv_oval="true"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_toRightOf="@+id/product_item_iv"
+            android:layout_marginLeft="@dimen/length_10"
+            android:layout_marginTop="@dimen/length_6"
+            android:layout_marginBottom="@dimen/length_6"
+            android:layout_toLeftOf="@+id/product_item_iv2"
+            >
+            <TextView
+                android:id="@+id/product_item_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="简介"
+                android:textSize="@dimen/size_14"
+                android:lines="1"
+                android:textColor="@color/text_color_32"
+                />
+            <TextView
+                android:id="@+id/product_item_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="简介"
+                android:textSize="@dimen/size_12"
+                android:lines="1"
+                android:textColor="@color/text_color_79"
+                />
+            <TextView
+                android:id="@+id/product_item_tv3"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="简介"
+                android:textSize="@dimen/size_12"
+                android:lines="1"
+                android:textColor="@color/text_color_huang"
+                />
+        </LinearLayout>
+        
+        <ImageView
+            android:id="@+id/product_item_iv2"
+            android:layout_width="@dimen/length_8"
+            android:layout_height="14.5dp"
+            android:src="@mipmap/main_product_item_iv"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/length_10"/>
+        
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/bg_color_d7"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/length_10"/>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

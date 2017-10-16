@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/bg_color_ff"
+    card_view:cardElevation="0dp"
+
+    app:cardElevation="0px"
+    app:cardMaxElevation="2px"
+    app:cardUseCompatPadding="false"
+    app:contentPaddingBottom="-20dp"
+    app:contentPaddingTop="-20dp"
+    >
+    
+	<RelativeLayout 
+        android:id="@+id/rl_main_creditcard_item"
+        android:layout_width="wrap_content"
+        android:layout_height="82dp"
+        android:background="@drawable/classification_item_bg"
+        >
+        <ImageView 
+            android:id="@+id/iv_creditcard_item"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            />
+        <LinearLayout 
+            android:id="@+id/ll_creditcard_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/iv_creditcard_item"
+            android:layout_centerVertical="true"
+            >
+            <TextView 
+                android:id="@+id/tv1_creditcard_item"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:text="省呗"
+                android:layout_marginTop="9dp"
+                android:textColor="#323232"
+                android:textSize="14sp"/>
+            
+                <TextView 
+                android:id="@+id/tv4_creditcard_item"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:singleLine="false"
+                android:layout_marginTop="6dp"
+                android:lineSpacingExtra="2dp"
+                android:textScaleX="0.96"
+                android:text="三个工作日下款"
+                android:layout_marginRight="10dp"
+                android:textColor="#323232"
+                android:textSize="10sp"
+                android:layout_marginBottom="9dp"/>
+               
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
