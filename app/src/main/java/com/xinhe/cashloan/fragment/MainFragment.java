@@ -27,11 +27,10 @@ import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.google.gson.Gson;
 import com.mancj.slideup.SlideUp;
 import com.xinhe.cashloan.R;
-import com.xinhe.cashloan.activity.WebViewActivity;
+import com.xinhe.cashloan.activity.ProductDetailsActivity;
 import com.xinhe.cashloan.adapter.ProductAdapter;
 import com.xinhe.cashloan.biz.BrowsingHistory;
 import com.xinhe.cashloan.entity.Product;
-import com.xinhe.cashloan.myapp.MyApplication;
 import com.xinhe.cashloan.util.Constants;
 import com.xinhe.cashloan.util.DeviceUtil;
 import com.xinhe.cashloan.util.ExceptionUtil;
@@ -120,9 +119,8 @@ public class MainFragment extends Fragment {
         mainFragmentRv.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(getContext(), WebViewActivity.class);
-                intent.putExtra("url",products.get(position).getLink());
-                intent.putExtra("title",products.get(position).getName());
+                Intent intent=new Intent(getContext(), ProductDetailsActivity.class);
+                intent.putExtra("PrdListProduct",products.get(position));
                 startActivity(intent);
                 if ("0".equals(buttonPosition)){
                     new BrowsingHistory().execute(products.get(position).getUid(),"1");

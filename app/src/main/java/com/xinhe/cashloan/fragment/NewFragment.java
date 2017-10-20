@@ -25,13 +25,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.google.gson.Gson;
-import com.itheima.roundedimageview.RoundedImageView;
 import com.xinhe.cashloan.R;
+import com.xinhe.cashloan.activity.ProductDetailsActivity;
 import com.xinhe.cashloan.activity.ProductListActivity;
 import com.xinhe.cashloan.activity.WebViewActivity;
 import com.xinhe.cashloan.adapter.ClassificationAdapter;
 import com.xinhe.cashloan.adapter.MainProductAdapter;
-import com.xinhe.cashloan.adapter.NewProductAdapter;
 import com.xinhe.cashloan.adapter.TenProductAdapter;
 import com.xinhe.cashloan.biz.BrowsingHistory;
 import com.xinhe.cashloan.biz.ClickHistory;
@@ -379,9 +378,8 @@ public class NewFragment extends Fragment {
         newFragmentRv.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(getContext(), WebViewActivity.class);
-                intent.putExtra("url",newProducts.get(position).getLink());
-                intent.putExtra("title",newProducts.get(position).getName());
+                Intent intent=new Intent(getContext(), ProductDetailsActivity.class);
+                intent.putExtra("PrdListProduct",newProducts.get(position));
                 startActivity(intent);
                 //浏览记录
                 new BrowsingHistory().execute(newProducts.get(position).getUid(),"0");
@@ -490,9 +488,8 @@ public class NewFragment extends Fragment {
         tenProductRv.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(getContext(), WebViewActivity.class);
-                intent.putExtra("url",tenProducts.get(position).getLink());
-                intent.putExtra("title",tenProducts.get(position).getName());
+                Intent intent=new Intent(getContext(), ProductDetailsActivity.class);
+                intent.putExtra("PrdListProduct",tenProducts.get(position));
                 startActivity(intent);
                 new BrowsingHistory().execute(tenProducts.get(position).getUid(),"0");
                 //点击记录

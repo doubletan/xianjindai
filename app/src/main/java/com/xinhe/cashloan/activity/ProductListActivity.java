@@ -73,9 +73,8 @@ public class ProductListActivity extends AppCompatActivity {
         productListRv.addOnItemTouchListener(new OnItemClickListener() {
             @Override
             public void onSimpleItemClick(BaseQuickAdapter adapter, View view, int position) {
-                Intent intent=new Intent(ProductListActivity.this, WebViewActivity.class);
-                intent.putExtra("url",product.getPrdList().get(position).getLink());
-                intent.putExtra("title",product.getPrdList().get(position).getName());
+                Intent intent=new Intent(ProductListActivity.this, ProductDetailsActivity.class);
+                intent.putExtra("PrdListProduct",product.getPrdList().get(position));
                 startActivity(intent);
                 new BrowsingHistory().execute(product.getPrdList().get(position).getUid(),"0");
             }

@@ -1,0 +1,213 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    tools:context="com.xinhe.cashloan.activity.ProductDetailsActivity" >
+
+    <LinearLayout 
+        android:id="@+id/rl_product_details_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:visibility="gone"
+        ></LinearLayout>
+    
+    <include layout="@layout/toolbar"/>
+
+    <include layout="@layout/line"/>
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <include layout="@layout/gray_interval" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="90dp" >
+
+                <ImageView
+                    android:id="@+id/iv_product_details"
+                    android:layout_width="62dp"
+                    android:layout_height="62dp"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+
+            <include layout="@layout/gray_interval" />
+
+            <TextView
+                android:id="@+id/tv_product_details_strategy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:text="豆豆钱攻略"
+                android:textColor="#323232"
+                android:textSize="17sp" />
+
+            <include layout="@layout/line_short" />
+
+            <TextView
+                android:id="@+id/product_details_limit_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:lineSpacingExtra="10dp"
+                android:text="豆豆钱攻略"
+                android:textColor="#646464"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:id="@+id/product_details_deadline_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:lineSpacingExtra="10dp"
+                android:text="豆豆钱攻略"
+                android:textColor="#646464"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:id="@+id/product_details_cost_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:lineSpacingExtra="10dp"
+                android:text="豆豆钱攻略"
+                android:textColor="#646464"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:id="@+id/product_details_speed_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:lineSpacingExtra="10dp"
+                android:text="豆豆钱攻略"
+                android:textColor="#646464"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:id="@+id/product_details_difficulty_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:lineSpacingExtra="10dp"
+                android:text="豆豆钱攻略"
+                android:textColor="#646464"
+                android:textSize="15sp"
+                android:layout_marginBottom="15dp"/>
+
+            <include layout="@layout/gray_interval" />
+
+            <TextView
+                android:id="@+id/tv_product_details_request"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:text="申请条件"
+                android:textColor="#323232"
+                android:textSize="17sp" />
+
+            <include layout="@layout/line_short" />
+
+            <TextView
+                android:id="@+id/product_details_demand1_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="15dp"
+                android:lineSpacingExtra="10dp"
+                android:text="申请要求"
+                android:textColor="#646464"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:id="@+id/product_details_demand2_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:lineSpacingExtra="10dp"
+                android:text="申请要求"
+                android:textColor="#646464"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:id="@+id/product_details_tips1_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:lineSpacingExtra="10dp"
+                android:text="申请要求"
+                android:textColor="#646464"
+                android:textSize="15sp"
+                />
+            <TextView
+                android:id="@+id/product_details_tips2_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:lineSpacingExtra="10dp"
+                android:text="申请要求"
+                android:textColor="#646464"
+                android:textSize="15sp"
+                android:layout_marginBottom="@dimen/length_15"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <include 
+        layout="@layout/line"/>
+    
+    <RelativeLayout 
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        >
+        <Button 
+            android:id="@+id/btn_product_details_apply"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_selector"
+            android:gravity="center"
+            android:text="申请借款"
+            android:textColor="#ffffff"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+</LinearLayout>
