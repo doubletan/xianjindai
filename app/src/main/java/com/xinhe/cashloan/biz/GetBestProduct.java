@@ -4,7 +4,6 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
-import com.xinhe.cashloan.entity.Classification;
 import com.xinhe.cashloan.entity.Product;
 import com.xinhe.cashloan.myapp.MyApplication;
 import com.xinhe.cashloan.util.Constants;
@@ -16,12 +15,11 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
 /**
- * Created by tantan on 2017/9/30.
+ * Created by tantan on 2017/12/18.
  */
 
-public class GetClassificationProduct {
-
-    public GetClassificationProduct(Context mContext) {
+public class GetBestProduct {
+    public GetBestProduct(Context mContext) {
         this.mContext = mContext;
     }
 
@@ -31,13 +29,14 @@ public class GetClassificationProduct {
         new Thread(new Runnable() {
             @Override
             public void run() {
-
-
                 String URL = Constants.URL;
                 String nameSpace = Constants.nameSpace;
-                String method_Name = "Get6Type";
+                String method_Name = "GetProduct";
                 String SOAP_ACTION = nameSpace + method_Name;
                 SoapObject rpc = new SoapObject(nameSpace, method_Name);
+                rpc.addProperty("sAppName", Constants.appName);
+                rpc.addProperty("sPage", "55");
+                rpc.addProperty("channel", "3");
                 HttpTransportSE transport = new HttpTransportSE(URL);
                 transport.debug = true;
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -47,12 +46,15 @@ public class GetClassificationProduct {
                 try {
                     transport.call(SOAP_ACTION, envelope);
                     SoapObject object = (SoapObject) envelope.bodyIn;
-                    String str = object.getProperty("Get6TypeResult").toString();
+                    String str = object.getProperty("GetProductResult").toString();
 
                     if (!TextUtils.isEmpty(str) && !str.startsWith("1")&& !str.startsWith("2")) {
                         Gson gson = new Gson();
-                        Classification product = gson.fromJson(str, Classification.class);
-                        MyApplication.classification=product;
+                        Product product = gson.fromJson(str, Product.class);
+                        MyApplication.bestProduct=product;
+//                        TinyDB db = new TinyDB(mContext);
+//                        db.remove("Product");
+//                        db.putObject("Product",product);
                     }
                 } catch (Exception e) {
                     ExceptionUtil.handleException(e);
@@ -60,4 +62,5 @@ public class GetClassificationProduct {
             }
         }).start();
     }
+
 }

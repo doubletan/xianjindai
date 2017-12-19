@@ -51,51 +51,130 @@
         android:layout_centerVertical="true"
         android:background="@color/text_color_ef"
         />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="41dp" >
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/main_fragment_ll1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/main_fragment_iv1"
+                android:layout_marginTop="@dimen/length_10"/>
 
             <TextView
-                android:id="@+id/main_classification_tv1"
+                android:id="@+id/main_fragment_ll1_tv1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="分类专题"
+                android:text="贷款大全"
                 android:textColor="@color/text_color_00"
+                android:layout_marginTop="5dp"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/main_classification_tv2"
+                android:id="@+id/main_fragment_ll1_tv2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_toRightOf="@+id/main_classification_tv1"
-                android:text="BEST"
-                android:textColor="#dc8a42"
-                android:textSize="14sp"
-                android:typeface="sans" />
-        </RelativeLayout>
-    </RelativeLayout>
+                android:text="亲测好产品"
+                android:textColor="@color/bg_color_99"
+                android:layout_marginTop="@dimen/length_3"
+                android:textSize="9sp"
+                android:layout_marginBottom="@dimen/length_10"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/main_fragment_ll2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/main_fragment_iv2"
+                android:layout_marginTop="@dimen/length_10"/>
 
-    <GridView
-        android:id="@+id/main_classification_gv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="5dp"
-        android:gravity="center"
-        android:horizontalSpacing="15dp"
-        android:listSelector="#ffffff"
-        android:numColumns="auto_fit"
-        android:stretchMode="columnWidth"
-        android:verticalSpacing="10dp" >
-    </GridView>
+            <TextView
+                android:id="@+id/main_fragment_ll2_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="精品推荐"
+                android:textColor="@color/text_color_00"
+                android:layout_marginTop="5dp"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/main_fragment_ll2_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="万千贷友极力推荐"
+                android:textColor="@color/bg_color_99"
+                android:layout_marginTop="@dimen/length_3"
+                android:textSize="9sp"
+                android:layout_marginBottom="@dimen/length_10"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/main_fragment_ll3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            >
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@mipmap/main_fragment_iv3"
+                android:layout_marginTop="@dimen/length_10"/>
+
+            <TextView
+                android:id="@+id/main_fragment_ll3_tv1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="我要办卡"
+                android:textColor="@color/text_color_00"
+                android:layout_marginTop="5dp"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/main_fragment_ll3_tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="办卡 取现 代还"
+                android:textColor="@color/bg_color_99"
+                android:layout_marginTop="@dimen/length_3"
+                android:textSize="9sp"
+                android:layout_marginBottom="@dimen/length_10"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!--<GridView-->
+        <!--android:id="@+id/main_classification_gv"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="10dp"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:layout_marginRight="15dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:gravity="center"-->
+        <!--android:horizontalSpacing="15dp"-->
+        <!--android:listSelector="#ffffff"-->
+        <!--android:numColumns="auto_fit"-->
+        <!--android:stretchMode="columnWidth"-->
+        <!--android:verticalSpacing="10dp" >-->
+    <!--</GridView>-->
 
     <View
         android:layout_width="match_parent"

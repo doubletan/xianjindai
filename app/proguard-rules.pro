@@ -30,6 +30,11 @@
   public *;
 }
 
+#baidu定位
+-keep class com.baidu.** {*;}
+-keep class vi.com.** {*;}
+-dontwarn com.baidu.**
+
 
 #Gson
 -keepattributes Signature

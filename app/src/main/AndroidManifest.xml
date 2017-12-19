@@ -23,7 +23,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:name="com.xinhe.cashloan.myapp.MyApplication"
+        android:name=".myapp.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
@@ -31,7 +31,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
-            android:name="com.xinhe.cashloan.activity.LauncherActivity"
+            android:name=".activity.LauncherActivity"
             android:theme="@style/Theme.AppStartLoad">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,17 +39,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.xinhe.cashloan.activity.MainActivity" />
-        <activity android:name="com.xinhe.cashloan.activity.WebViewActivity" />
-        <activity android:name="com.xinhe.cashloan.activity.ProductListActivity" />
-        <activity android:name="com.xinhe.cashloan.activity.ProductDetailsActivity" />
-        <activity android:name="com.xinhe.cashloan.activity.LoginActivity"
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.WebViewActivity" />
+        <activity android:name=".activity.ProductListActivity" />
+        <activity android:name=".activity.ProductDetailsActivity" />
+        <activity
+            android:name=".activity.LoginActivity"
             android:theme="@style/Theme.Login"
-            android:windowSoftInputMode="adjustPan"></activity>
-        <activity android:name="com.xinhe.cashloan.activity.GuideActivity" />
+            android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".activity.GuideActivity" />
+        <activity android:name=".activity.ChooseInformationActivity" />
+        //下载 针对7.0添加代码
+        <service android:name=".biz.update.UpdateService" />
 
-        //下载  针对7.0添加代码
-        <service android:name="com.xinhe.cashloan.biz.update.UpdateService"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.update_app.file_provider"
@@ -57,23 +59,31 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/update_app_path"/>
+                android:resource="@xml/update_app_path" />
         </provider>
-
-
         //极光
-        <service android:name="cn.jpush.android.service.PushService"
+        <service
+            android:name="cn.jpush.android.service.PushService"
             android:process=":multiprocess"
-            tools:node="replace" >
-
-        </service>
-
+            tools:node="replace" />
         //友盟
-        <meta-data android:value="57870cbb67e58e332a000858" android:name="UMENG_APPKEY"/>
-        <meta-data android:value="self" android:name="UMENG_CHANNEL"/>
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="57870cbb67e58e332a000858" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="self" />
+        //百度定位
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="Ge9gb2GS5napyh3GL012fHy8gQAlQNRI"></meta-data>
 
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" />
 
-
+        <activity android:name=".activity.WebViewTitleActivity"></activity>
     </application>
 
 </manifest>

@@ -1,39 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:background="@drawable/verify"
+        android:orientation="vertical"
         >
-        <com.mcxtzhang.captchalib.SwipeCaptchaView
-            android:id="@+id/swipeCaptchaView"
-            android:layout_width="300dp"
-            android:layout_height="200dp"
-            android:layout_centerHorizontal="true"
-            android:scaleType="centerCrop"
-            tools:src="@mipmap/verify2"
-            app:captchaHeight="30dp"
-            app:captchaWidth="30dp"/>
 
-        <SeekBar
-            android:id="@+id/dragBar"
-            android:layout_width="340dp"
-            android:layout_height="60dp"
-            android:layout_below="@id/swipeCaptchaView"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
-            android:thumb="@drawable/thumb_bg"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="请输入图片的结果"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/length_15"
+            android:textColor="@color/bg_color_33"
+            android:textSize="@dimen/size_14"
             />
-        <!--android:progressDrawable="@drawable/dragbg"-->
-        <!--android:thumb="@drawable/thumb_bg"-->
 
+        <ImageView
+            android:id="@+id/verify_iv"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/length_12"
+            />
 
+        <EditText
+            android:id="@+id/verify_et"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/size_13"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textColor="@color/bg_color_33"
+            android:layout_marginTop="@dimen/length_3"
+            android:background="@drawable/verify_et_bg"
+            android:layout_gravity="center_horizontal"
+            android:padding="@dimen/length_8"
+            />
 
-    </RelativeLayout>
+        <Button
+            android:id="@+id/verify_btn"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:background="@drawable/login_code_shape"
+            android:layout_gravity="center"
+            android:text="确定"
+            android:textColor="@color/bg_color_ff"
+            android:textSize="@dimen/size_14"
+            android:layout_marginBottom="@dimen/length_15"
+            android:layout_marginTop="@dimen/length_20"/>
+
+    </LinearLayout>
 
 </RelativeLayout>

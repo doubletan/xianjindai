@@ -10,7 +10,7 @@ import android.view.WindowManager;
 
 import com.umeng.analytics.MobclickAgent;
 import com.xinhe.cashloan.R;
-import com.xinhe.cashloan.biz.GetClassificationProduct;
+import com.xinhe.cashloan.biz.GetBestProduct;
 import com.xinhe.cashloan.biz.GetImageBean;
 import com.xinhe.cashloan.biz.GetNewProduct;
 import com.xinhe.cashloan.biz.GetTenProduct;
@@ -97,7 +97,7 @@ public class LauncherActivity extends AppCompatActivity {
         new GetNewProduct(this).execute();
         new GetImageBean(this).execute();
         new GetTenProduct(this).execute();
-        new GetClassificationProduct(this).execute();
+        new GetBestProduct(this).execute();
     }
 
     public void onResume() {

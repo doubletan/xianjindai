@@ -3,7 +3,10 @@ package com.xinhe.cashloan.activity;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -87,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
     private long mLastBackTime;
     private int selectedIndex;
     private int currentIndex = 0;
+    private InnerReceiver receiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 // 透明导航栏
                 // getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             }
+            //把当前activity加入到集合里
             MyApplication.getApp().addToList(this);
             //检测版本
             testVersion();
@@ -114,11 +119,30 @@ public class MainActivity extends AppCompatActivity {
                         login();
                     }
                 }, 500);
-
             } else {
-                MyApplication.userId = (String) SPUtils.get(this, "userId", "");
-                //获取权限
-                getPermissions();
+                if (SPUtils.contains(this,"lasttime")){
+                    long newTime = System.currentTimeMillis();
+                    String lastTime = (String) SPUtils.get(this, "lasttime", "");
+                    long oldTime = Long.parseLong(lastTime);
+                    if (newTime>oldTime){
+                        new Handler().postDelayed(new Runnable(){
+                            public void run() {
+                                login();
+                            }
+                        }, 500);
+                    }else{
+                        MyApplication.userId = (String) SPUtils.get(this, "userId", "");
+                        MyApplication.phone = (String) SPUtils.get(this, "phone", "");
+                        //获取权限
+                        getPermissions();
+                    }
+                }else {
+                    new Handler().postDelayed(new Runnable(){
+                        public void run() {
+                            login();
+                        }
+                    }, 500);
+                }
             }
         } catch (Exception e) {
             ExceptionUtil.handleException(e);
@@ -462,11 +486,17 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {
         super.onResume();
         MobclickAgent.onResume(this);
+        // 注册广播接收者
+        receiver = new InnerReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(Constants.INTENT_EXTRA_MAIN_FRAGMENT_CLICK);
+        registerReceiver(receiver, filter);
     }
 
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+        unregisterReceiver(receiver);
     }
 
     @Override
@@ -513,4 +543,42 @@ public class MainActivity extends AppCompatActivity {
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
+
+    // 广播接收者
+    private class InnerReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // 获取Intent中的Action
+            String action = intent.getAction();
+            // 判断Action
+            if (Constants.INTENT_EXTRA_MAIN_FRAGMENT_CLICK.equals(action)) {
+                selectedIndex = 1;
+                // 判断是不是当前的
+                // 判断单击是不是当前的
+                if (selectedIndex != currentIndex) {
+                    // 不是当前的
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    // 当前hide
+                    transaction.hide(fragments[currentIndex]);
+                    // show你选中
+
+                    if (!fragments[selectedIndex].isAdded()) {
+                        // 以前没添加过
+                        transaction.add(R.id.main_activity_fragment_container, fragments[selectedIndex]);
+                    }
+                    // 事务
+                    transaction.show(fragments[selectedIndex]);
+                    transaction.commit();
+
+                    btnArray[currentIndex].setSelected(false);
+                    btnArray[selectedIndex].setSelected(true);
+                    currentIndex = selectedIndex;
+                }
+            }
+
+        }
+
+    }
+
 }

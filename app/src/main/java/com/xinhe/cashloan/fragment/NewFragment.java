@@ -17,6 +17,7 @@ import android.view.ViewParent;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,12 +30,11 @@ import com.xinhe.cashloan.R;
 import com.xinhe.cashloan.activity.ProductDetailsActivity;
 import com.xinhe.cashloan.activity.ProductListActivity;
 import com.xinhe.cashloan.activity.WebViewActivity;
-import com.xinhe.cashloan.adapter.ClassificationAdapter;
+import com.xinhe.cashloan.activity.WebViewTitleActivity;
 import com.xinhe.cashloan.adapter.MainProductAdapter;
 import com.xinhe.cashloan.adapter.TenProductAdapter;
 import com.xinhe.cashloan.biz.BrowsingHistory;
 import com.xinhe.cashloan.biz.ClickHistory;
-import com.xinhe.cashloan.entity.Classification;
 import com.xinhe.cashloan.entity.ImagerBean;
 import com.xinhe.cashloan.entity.MyMessage;
 import com.xinhe.cashloan.entity.Product;
@@ -64,7 +64,6 @@ import java.util.TimerTask;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import cn.bingoogolapple.bgabanner.BGABanner;
-import cn.pedant.SweetAlert.SweetAlertDialog;
 
 
 /**
@@ -102,9 +101,10 @@ public class NewFragment extends Fragment {
     private TextView loanCountTv;
     private RecyclerView tenProductRv;
     private TenProductAdapter tenAdapter;
-    private ClassificationAdapter classificationAdapter;
-    private GridView classificationGv;
-    private ArrayList<Classification.TypeListProduct> classifications=new ArrayList<>();
+    private LinearLayout ll1;
+    private ArrayList<Product.PrdListProduct> bestProduct;
+    private LinearLayout ll2;
+    private LinearLayout ll3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -134,7 +134,41 @@ public class NewFragment extends Fragment {
         newFragmentVvp = (VerticalViewPager) headerView.findViewById(R.id.new_fragment_vvp);
         loanCountTv = (TextView) headerView.findViewById(R.id.new_fragment_loan_count);
         tenProductRv = (RecyclerView) headerView.findViewById(R.id.main_rv);
-        classificationGv = (GridView) headerView.findViewById(R.id.main_classification_gv);
+        ll1 = (LinearLayout) headerView.findViewById(R.id.main_fragment_ll1);
+        ll2 = (LinearLayout) headerView.findViewById(R.id.main_fragment_ll2);
+        ll3 = (LinearLayout) headerView.findViewById(R.id.main_fragment_ll3);
+
+        //贷款大全
+        ll1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                //对应BroadcastReceiver中intentFilter的action
+                intent.setAction(Constants.INTENT_EXTRA_MAIN_FRAGMENT_CLICK);
+                //发送广播
+                getActivity().sendBroadcast(intent);
+            }
+        });
+
+        //精品推荐
+        ll2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), ProductDetailsActivity.class);
+                intent.putExtra("PrdListProduct",bestProduct.get(0));
+                startActivity(intent);
+            }
+        });
+
+        //精品推荐
+        ll3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), WebViewTitleActivity.class);
+                intent.putExtra("url", "http://www.shoujijiekuan.com/Credit/index.html?channel=AJXA9MJC&terminal=1&qudao1=android&qudao2="+Constants.channel1+"&id="+MyApplication.userId);
+                startActivity(intent);
+            }
+        });
 
         /**
          * 调整viewpager的切换速度
@@ -186,18 +220,12 @@ public class NewFragment extends Fragment {
             getImageBean();
         }
 
-
-
         //分类
-        if(null!=MyApplication.classification){
-            classifications = MyApplication.classification.getTypeList();
+        if(null!=MyApplication.bestProduct){
+            bestProduct = MyApplication.bestProduct.getPrdList();
         }else {
-            getClassificationProduct();
+            getBestProduct();
         }
-        classificationAdapter = new ClassificationAdapter(getContext(), classifications);
-        classificationGv.setAdapter(classificationAdapter);
-        Utill.resetGridViewHight(classificationGv);
-
 
         //十个产品
         if(null!=MyApplication.tenProduct){
@@ -221,8 +249,8 @@ public class NewFragment extends Fragment {
         startCycle();
     }
 
-    //获取分类产品
-    private void getClassificationProduct() {
+    //精品推荐
+    private void getBestProduct() {
         if (DeviceUtil.IsNetWork(getContext()) == false) {
             return;
         }
@@ -231,9 +259,12 @@ public class NewFragment extends Fragment {
             public void run() {
                 String URL = Constants.URL;
                 String nameSpace = Constants.nameSpace;
-                String method_Name = "Get6Type";
+                String method_Name = "GetProduct";
                 String SOAP_ACTION = nameSpace + method_Name;
                 SoapObject rpc = new SoapObject(nameSpace, method_Name);
+                rpc.addProperty("sAppName", Constants.appName);
+                rpc.addProperty("sPage", "55");
+                rpc.addProperty("channel", "3");
                 HttpTransportSE transport = new HttpTransportSE(URL);
                 transport.debug = true;
                 SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
@@ -243,37 +274,21 @@ public class NewFragment extends Fragment {
                 try {
                     transport.call(SOAP_ACTION, envelope);
                     SoapObject object = (SoapObject) envelope.bodyIn;
-                    final String str = object.getProperty("Get6TypeResult").toString();
+                    String str = object.getProperty("GetProductResult").toString();
 
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (!TextUtils.isEmpty(str) && !str.startsWith("1,") && !str.startsWith("2")) {
-                                Gson gson = new Gson();
-                                Classification product = gson.fromJson(str, Classification.class);
-                                classifications.clear();
-                                classifications.addAll(product.getTypeList());
-                                classificationAdapter.notifyDataSetChanged();
-                                Utill.resetGridViewHight(classificationGv);
-                            } else {
-                                Toast.makeText(getContext(), "获取数据失败", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
-                } catch (final Exception e) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ExceptionUtil.handleException(e);
-                            Toast.makeText(getContext(), "获取数据失败", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
+                    if (!TextUtils.isEmpty(str) && !str.startsWith("1")&& !str.startsWith("2")) {
+                        Gson gson = new Gson();
+                        Product product = gson.fromJson(str, Product.class);
+                        MyApplication.bestProduct=product;
+                        bestProduct=product.getPrdList();
+                    }
+                } catch (Exception e) {
+                    ExceptionUtil.handleException(e);
                 }
             }
         }).start();
     }
+
 
     private void setViews() {
         if (DeviceUtil.IsNetWork(getContext()) == false) {
@@ -401,8 +416,10 @@ public class NewFragment extends Fragment {
                 //借款人数
                 int l = (int)((System.currentTimeMillis()/1000)%86400)/2;
                 loanCountTv.setText("今日已有"+l+"人申请");
-                //分类
-                getClassificationProduct();
+
+                //精品推荐
+                getBestProduct();
+
                 //十个产品，单写在这是为了刷新
                 new Thread(new Runnable() {
                     @Override
@@ -471,17 +488,6 @@ public class NewFragment extends Fragment {
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
 
-            }
-        });
-        //分类监听
-        classificationGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (DeviceUtil.IsNetWork(getContext()) == false) {
-                    Toast.makeText(getContext(), "网络未连接", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                getProductList("5"+(position+1),classifications.get(position).getTips1());
             }
         });
         //十个产品

@@ -3,18 +3,11 @@ package com.xinhe.cashloan.myapp;
 import android.app.Activity;
 import android.app.Application;
 
-import com.meituan.android.walle.ChannelInfo;
-import com.meituan.android.walle.WalleChannelReader;
-import com.umeng.analytics.MobclickAgent;
-import com.xinhe.cashloan.entity.Classification;
-import com.xinhe.cashloan.entity.CreditProduct;
 import com.xinhe.cashloan.entity.ImagerBean;
 import com.xinhe.cashloan.entity.Product;
-import com.xinhe.cashloan.util.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -29,6 +22,8 @@ public class MyApplication extends Application{
     public static boolean isRelease = true;
     //    用户ID
     public static String userId;
+    //    用户手机号
+    public static String phone;
     //    推荐产品
     public static Product tenProduct;
     //    新产品
@@ -36,7 +31,7 @@ public class MyApplication extends Application{
     //    轮播图
     public static ImagerBean imagerBean;
     //分类
-    public static Classification classification;
+    public static Product bestProduct;
 
     private List<Activity> myActivity = new ArrayList<>();
     private static MyApplication instance;

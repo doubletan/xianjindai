@@ -25,6 +25,8 @@ import com.xinhe.cashloan.entity.Product;
 import com.xinhe.cashloan.util.Constants;
 import com.xinhe.cashloan.util.DeviceUtil;
 import com.xinhe.cashloan.util.ExceptionUtil;
+import com.xinhe.cashloan.util.Utill;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
@@ -99,7 +101,7 @@ public class ProductDetailsActivity extends Activity implements OnClickListener 
             LinearLayout barLl = (LinearLayout) findViewById(R.id.rl_product_details_top);
             barLl.setVisibility(View.VISIBLE);
             LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) barLl.getLayoutParams();
-            ll.height = getStatusBarHeight();
+            ll.height = Utill.getStatusBarHeight(this);
             ll.width = RelativeLayout.LayoutParams.MATCH_PARENT;
             barLl.setLayoutParams(ll);
         }
@@ -112,15 +114,6 @@ public class ProductDetailsActivity extends Activity implements OnClickListener 
         setListeners();
     }
 
-    // 获取状态栏高度
-    public int getStatusBarHeight() {
-        int result = 0;
-        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            result = getResources().getDimensionPixelSize(resourceId);
-        }
-        return result;
-    }
 
     public void initActionBar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);

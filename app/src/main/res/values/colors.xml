@@ -38,5 +38,8 @@
     <color name="bg_color_e8">#e8e8e8</color>
     <color name="bg_color_btn">#e3b600</color>
     <color name="bg_color_ce">#cecece</color>
+    <color name="bg_color_ee">#eeeeee</color>
+    <color name="bg_color_cc">#cccccc</color>
+    <color name="bg_color_33">#333333</color>
 
 </resources>

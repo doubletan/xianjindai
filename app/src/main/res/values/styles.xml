@@ -26,7 +26,7 @@
 
 
     <style name="Theme.Login" parent="AppTheme">
-        <item name="android:windowBackground">@mipmap/login_bg</item>
+        <!--<item name="android:windowBackground">@mipmap/login_bg</item>-->
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:backgroundDimEnabled">true</item><!-- 模糊 -->
@@ -111,5 +111,7 @@
         <item name="android:windowEnterAnimation">@anim/pop_in</item>
         <item name="android:windowExitAnimation">@anim/pop_out</item>
     </style>
+
+
 
 </resources>
