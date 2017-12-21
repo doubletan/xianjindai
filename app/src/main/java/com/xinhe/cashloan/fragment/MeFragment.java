@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.xinhe.cashloan.R;
+import com.xinhe.cashloan.activity.LoginActivity;
 import com.xinhe.cashloan.activity.WebViewActivity;
 import com.xinhe.cashloan.adapter.CreditProductAdapter;
 import com.xinhe.cashloan.biz.BrowsingHistory;
@@ -113,11 +114,16 @@ public class MeFragment extends Fragment {
         newFragmentLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getContext(), WebViewActivity.class);
-                intent.putExtra("url",creditProducts.get(position).getClink());
-                intent.putExtra("title",creditProducts.get(position).getCname());
-                startActivity(intent);
-                new BrowsingHistory().execute(creditProducts.get(position).getUid(),"4");
+                if (MyApplication.isLogin){
+                    Intent intent=new Intent(getContext(), WebViewActivity.class);
+                    intent.putExtra("url",creditProducts.get(position).getClink());
+                    intent.putExtra("title",creditProducts.get(position).getCname());
+                    startActivity(intent);
+                    new BrowsingHistory().execute(creditProducts.get(position).getUid(),"4");
+                }else {
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         //刷新

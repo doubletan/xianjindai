@@ -19,10 +19,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -39,8 +43,18 @@ import com.xinhe.cashloan.fragment.MeFragment;
 import com.xinhe.cashloan.fragment.NewFragment;
 import com.xinhe.cashloan.myapp.MyApplication;
 import com.xinhe.cashloan.util.Constants;
+import com.xinhe.cashloan.util.DeviceUtil;
 import com.xinhe.cashloan.util.ExceptionUtil;
+import com.xinhe.cashloan.util.GetMyKey;
 import com.xinhe.cashloan.util.SPUtils;
+import com.xinhe.cashloan.view.MyProgressDialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.ksoap2.SoapEnvelope;
+import org.ksoap2.serialization.SoapObject;
+import org.ksoap2.serialization.SoapSerializationEnvelope;
+import org.ksoap2.transport.HttpTransportSE;
 
 import java.io.File;
 import java.io.InputStream;
@@ -113,35 +127,23 @@ public class MainActivity extends AppCompatActivity {
             setViews();
             //设置监听
             setListener();
+            //获取权限
+            getPermissions();
             if (!SPUtils.contains(this, "userId")) {
-                new Handler().postDelayed(new Runnable(){
-                    public void run() {
-                        login();
-                    }
-                }, 500);
+                MyApplication.isLogin=false;
             } else {
                 if (SPUtils.contains(this,"lasttime")){
                     long newTime = System.currentTimeMillis();
-                    String lastTime = (String) SPUtils.get(this, "lasttime", "");
-                    long oldTime = Long.parseLong(lastTime);
+                    Long oldTime = (Long) SPUtils.get(this, "lasttime", 0L);
                     if (newTime>oldTime){
-                        new Handler().postDelayed(new Runnable(){
-                            public void run() {
-                                login();
-                            }
-                        }, 500);
+                        MyApplication.isLogin=false;
                     }else{
+                        MyApplication.isLogin=true;
                         MyApplication.userId = (String) SPUtils.get(this, "userId", "");
                         MyApplication.phone = (String) SPUtils.get(this, "phone", "");
-                        //获取权限
-                        getPermissions();
                     }
                 }else {
-                    new Handler().postDelayed(new Runnable(){
-                        public void run() {
-                            login();
-                        }
-                    }, 500);
+                    MyApplication.isLogin=false;
                 }
             }
         } catch (Exception e) {
@@ -278,10 +280,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void login() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivityForResult(intent,Constants.MAINACTIVITY_TO_LOGINACTIVITY);
-        overridePendingTransition(R.anim.login_in, R.anim.login_out);
+//    public void login() {
+//        Intent intent = new Intent(this, LoginActivity.class);
+//        startActivityForResult(intent,Constants.MAINACTIVITY_TO_LOGINACTIVITY);
+//        overridePendingTransition(R.anim.login_in, R.anim.login_out);
+
 //        LoginDialog loginDialog = new LoginDialog(this,R.style.add_dialog);//创建Dialog并设置样式主题
 //        Window win = loginDialog.getWindow();
 //        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
@@ -308,9 +311,7 @@ public class MainActivity extends AppCompatActivity {
 ////        ImageView iv4 = (ImageView) window.findViewById(R.id.integral_exchange_tips_iv4);
 ////        ImageView iv5 = (ImageView) window.findViewById(R.id.integral_exchange_tips_iv5);
 ////        ImageView iv6 = (ImageView) window.findViewById(R.id.integral_exchange_tips_iv6);
-
-
-    }
+//    }
 
 
     private void testVersion() {
@@ -532,17 +533,19 @@ public class MainActivity extends AppCompatActivity {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode){
-            case 104:
-                if (-1==resultCode){
-                    getPermissions();
-                }
-                break;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        switch (requestCode){
+//            case 104:
+//                if (-1==resultCode){
+//
+//                }
+//                break;
+//        }
+//        super.onActivityResult(requestCode, resultCode, data);
+//    }
+
+
 
     // 广播接收者
     private class InnerReceiver extends BroadcastReceiver {

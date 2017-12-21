@@ -22,6 +22,7 @@ import com.umeng.analytics.MobclickAgent;
 import com.xinhe.cashloan.R;
 import com.xinhe.cashloan.biz.BrowsingHistory;
 import com.xinhe.cashloan.entity.Product;
+import com.xinhe.cashloan.myapp.MyApplication;
 import com.xinhe.cashloan.util.Constants;
 import com.xinhe.cashloan.util.DeviceUtil;
 import com.xinhe.cashloan.util.ExceptionUtil;
@@ -176,13 +177,17 @@ public class ProductDetailsActivity extends Activity implements OnClickListener 
                     Toast.makeText(this, "网络未连接", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                // 保存浏览记录
-                //浏览记录
-                new BrowsingHistory().execute(proid,"999");
-                Intent intent = new Intent(ProductDetailsActivity.this, WebViewActivity.class);
-                intent.putExtra("url", url);
-                intent.putExtra("title", name);
-                startActivity(intent);
+                if (MyApplication.isLogin){
+                    //浏览记录
+                    new BrowsingHistory().execute(proid,"999");
+                    Intent intent = new Intent(ProductDetailsActivity.this, WebViewActivity.class);
+                    intent.putExtra("url", url);
+                    intent.putExtra("title", name);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                }
                 break;
         }
 

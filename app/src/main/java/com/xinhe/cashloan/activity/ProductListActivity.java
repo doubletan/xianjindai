@@ -76,7 +76,7 @@ public class ProductListActivity extends AppCompatActivity {
                 Intent intent=new Intent(ProductListActivity.this, ProductDetailsActivity.class);
                 intent.putExtra("PrdListProduct",product.getPrdList().get(position));
                 startActivity(intent);
-                new BrowsingHistory().execute(product.getPrdList().get(position).getUid(),"0");
+//                new BrowsingHistory().execute(product.getPrdList().get(position).getUid(),"0");
             }
         });
     }

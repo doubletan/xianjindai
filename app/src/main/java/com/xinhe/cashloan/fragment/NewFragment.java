@@ -27,6 +27,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.listener.OnItemClickListener;
 import com.google.gson.Gson;
 import com.xinhe.cashloan.R;
+import com.xinhe.cashloan.activity.LoginActivity;
 import com.xinhe.cashloan.activity.ProductDetailsActivity;
 import com.xinhe.cashloan.activity.ProductListActivity;
 import com.xinhe.cashloan.activity.WebViewActivity;
@@ -54,7 +55,9 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -142,6 +145,8 @@ public class NewFragment extends Fragment {
         ll1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //点击记录
+                ClickHistory.saveClickHistory("3button_1",getContext());
                 Intent intent = new Intent();
                 //对应BroadcastReceiver中intentFilter的action
                 intent.setAction(Constants.INTENT_EXTRA_MAIN_FRAGMENT_CLICK);
@@ -154,19 +159,34 @@ public class NewFragment extends Fragment {
         ll2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //点击记录
+                ClickHistory.saveClickHistory("3button_2",getContext());
                 Intent intent=new Intent(getContext(), ProductDetailsActivity.class);
                 intent.putExtra("PrdListProduct",bestProduct.get(0));
                 startActivity(intent);
             }
         });
 
-        //精品推荐
+        //办信用卡
         ll3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(), WebViewTitleActivity.class);
-                intent.putExtra("url", "http://www.shoujijiekuan.com/Credit/index.html?channel=AJXA9MJC&terminal=1&qudao1=android&qudao2="+Constants.channel1+"&id="+MyApplication.userId);
-                startActivity(intent);
+                if (MyApplication.isLogin){
+                    //点击记录
+                    ClickHistory.saveClickHistory("3button_3",getContext());
+                    try {
+                        String channel = URLEncoder.encode(Constants.channel, "UTF-8");
+                        channel=channel.replace("%","%25");
+                        Intent intent = new Intent(getContext(), WebViewTitleActivity.class);
+                        intent.putExtra("url", "http://www.shoujijiekuan.com/Credit/index.html?terminal="+channel+"&source="+Constants.channel1+"&uid="+MyApplication.userId);
+                        startActivity(intent);
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
+                }else {
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -196,7 +216,12 @@ public class NewFragment extends Fragment {
         newFragmentBanner.setDelegate(new BGABanner.Delegate<ImageView, String>() {
             @Override
             public void onBannerItemClick(BGABanner banner, ImageView itemView, String model, int position) {
-                startActivity(new Intent(getContext(), WebViewActivity.class).putExtra("url", imagerBean.getDaohang().get(position).getLink()));
+                if (MyApplication.isLogin){
+                    startActivity(new Intent(getContext(), WebViewActivity.class).putExtra("url", imagerBean.getDaohang().get(position).getLink()));
+                }else {
+                    Intent intent = new Intent(getContext(), LoginActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         newFragmentBanner.setAdapter(new BGABanner.Adapter<ImageView, String>() {
@@ -396,10 +421,10 @@ public class NewFragment extends Fragment {
                 Intent intent=new Intent(getContext(), ProductDetailsActivity.class);
                 intent.putExtra("PrdListProduct",newProducts.get(position));
                 startActivity(intent);
-                //浏览记录
-                new BrowsingHistory().execute(newProducts.get(position).getUid(),"0");
+//                //浏览记录
+//                new BrowsingHistory().execute(newProducts.get(position).getUid(),"0");
                 //点击记录
-                ClickHistory.saveClickHistory("new"+(position+1),getContext());
+                ClickHistory.saveClickHistory("new_"+(position+1),getContext());
             }
         });
         //刷新
@@ -497,9 +522,9 @@ public class NewFragment extends Fragment {
                 Intent intent=new Intent(getContext(), ProductDetailsActivity.class);
                 intent.putExtra("PrdListProduct",tenProducts.get(position));
                 startActivity(intent);
-                new BrowsingHistory().execute(tenProducts.get(position).getUid(),"0");
+//                new BrowsingHistory().execute(tenProducts.get(position).getUid(),"0");
                 //点击记录
-                ClickHistory.saveClickHistory("tuijian"+(position+1),getContext());
+                ClickHistory.saveClickHistory("tuijian_"+(position+1),getContext());
             }
         });
     }

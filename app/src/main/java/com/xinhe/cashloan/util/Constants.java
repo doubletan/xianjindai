@@ -34,10 +34,8 @@ public class Constants {
     public static int PERMISSION_WRITE_EXTERNAL_STORAGE = 103;
     public static int PERMISSION_ACCESS_FINE_LOCATION = 109;
 
-    //主页面到登录页面的请求码
-    public static int MAINACTIVITY_TO_LOGINACTIVITY = 104;
-    //登录页面到选择信息的请求码
-    public static int LOGINACTIVITY_TO_CHOOSEINFOMATION = 110;
+//    //登录页面到选择信息的请求码
+//    public static int LOGINACTIVITY_TO_CHOOSEINFOMATION = 110;
 
     // 拍照请求码
     public static int REQUEST_CODE_TAKE_PICETURE = 105;

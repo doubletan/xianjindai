@@ -20,6 +20,8 @@ public class MyApplication extends Application{
      * release=true 软件发布 false:开发中
      */
     public static boolean isRelease = true;
+    //是否登录
+    public static boolean isLogin;
     //    用户ID
     public static String userId;
     //    用户手机号

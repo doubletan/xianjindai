@@ -122,11 +122,11 @@ public class MainFragment extends Fragment {
                 Intent intent=new Intent(getContext(), ProductDetailsActivity.class);
                 intent.putExtra("PrdListProduct",products.get(position));
                 startActivity(intent);
-                if ("0".equals(buttonPosition)){
-                    new BrowsingHistory().execute(products.get(position).getUid(),"1");
-                }else {
-                    new BrowsingHistory().execute(products.get(position).getUid(),"2");
-                }
+//                if ("0".equals(buttonPosition)){
+//                    new BrowsingHistory().execute(products.get(position).getUid(),"1");
+//                }else {
+//                    new BrowsingHistory().execute(products.get(position).getUid(),"2");
+//                }
             }
         });
     }

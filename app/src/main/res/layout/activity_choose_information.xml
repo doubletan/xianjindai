@@ -240,7 +240,7 @@
                 android:layout_marginRight="@dimen/length_6"
                 android:background="@drawable/readiobutton_bg"
                 android:button="@null"
-                android:text="白领"
+                android:text="上班族"
                 android:checked="true"
                 android:textSize="@dimen/size_13"
                 android:gravity="center"
@@ -253,7 +253,7 @@
                 android:layout_marginRight="@dimen/length_6"
                 android:background="@drawable/readiobutton_bg"
                 android:button="@null"
-                android:text="公务员"
+                android:text="企业主"
                 android:textSize="@dimen/size_13"
                 android:gravity="center"
                 android:textColor="@color/readiobutton_text"
@@ -264,7 +264,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/readiobutton_bg"
                 android:button="@null"
-                android:text="私企业户"
+                android:text="自由职业"
                 android:textSize="@dimen/size_13"
                 android:gravity="center"
                 android:textColor="@color/readiobutton_text"
@@ -287,18 +287,6 @@
         </RadioGroup>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/choose_btn"
-        android:layout_width="300dp"
-        android:layout_height="44dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/length_20"
-        android:background="@drawable/btn_selector"
-        android:text="立即申请"
-        android:textSize="@dimen/size_15"
-        android:textColor="@color/login_text_selector"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -317,7 +305,7 @@
             android:id="@+id/choose_agreement"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="《现金贷服务协议》"
+            android:text="《现金贷隐私协议》"
             android:textSize="@dimen/size_12"
             android:textColor="@color/text_color_huang"
             />
@@ -347,4 +335,18 @@
             android:textColor="@color/text_color_66"
             android:textSize="@dimen/size_12" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/choose_btn"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/length_20"
+        android:background="@drawable/btn_selector"
+        android:text="立即申请"
+        android:textSize="@dimen/size_15"
+        android:textColor="@color/login_text_selector"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
 </LinearLayout>

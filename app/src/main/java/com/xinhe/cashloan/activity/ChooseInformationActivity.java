@@ -1,15 +1,20 @@
 package com.xinhe.cashloan.activity;
 
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,11 +60,13 @@ public class ChooseInformationActivity extends AppCompatActivity {
     TextView chooseAgreement;
     @Bind(R.id.choose_cb)
     CheckBox chooseCb;
-    private long mLastBackTime;
     private String creditcard1;
     private String house1;
     private String car1;
     private String profession1;
+    private AlertDialog alertDialog;
+    private boolean isNewUser;
+    private MyProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +105,8 @@ public class ChooseInformationActivity extends AppCompatActivity {
     //初始化
     private void setViews() {
 
+        Intent intent=getIntent();
+        isNewUser=intent.getBooleanExtra("isNewUser",false);
     }
 
     @OnClick({R.id.choose_btn, R.id.choose_agreement})
@@ -152,16 +161,11 @@ public class ChooseInformationActivity extends AppCompatActivity {
                 break;
             case R.id.choose_agreement:
                 try {
-                    String companyName = URLEncoder.encode(Constants.companyName, "UTF-8");
-                    String appName = URLEncoder.encode(Constants.appName, "UTF-8");
-                    companyName=companyName.replace("%","%25");
-                    appName=appName.replace("%","%25");
-                    String url = "http://www.shoujijiekuan.com/GVRP/index.html?com_name=" + companyName + "&app_name=" + appName;
-                    Intent intent = new Intent(ChooseInformationActivity.this, WebViewActivity.class);
+                    String url = "http://www.shoujijiekuan.com/agreement/" ;
+                    Intent intent = new Intent(ChooseInformationActivity.this, WebViewTitleActivity.class);
                     intent.putExtra("url", url);
-                    intent.putExtra("title", "现金贷服务协议");
                     startActivity(intent);
-                } catch (UnsupportedEncodingException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
                 break;
@@ -188,7 +192,7 @@ public class ChooseInformationActivity extends AppCompatActivity {
             ExceptionUtil.handleException(e);
         }
 
-        final MyProgressDialog dialog = new MyProgressDialog(this, "提交中...", R.style.CustomDialog);
+        dialog = new MyProgressDialog(this, "提交中...", R.style.CustomDialog);
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
@@ -216,12 +220,16 @@ public class ChooseInformationActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(ChooseInformationActivity.this, "提交成功", Toast.LENGTH_LONG).show();
                                 long lastTime = System.currentTimeMillis()+604800000;
                                 SPUtils.put(ChooseInformationActivity.this,"lasttime",lastTime);
-                                setResult(-1);
-                                finish();
-                                dialog.dismiss();
+                                MyApplication.isLogin=true;
+                                if (isNewUser){
+                                    getInsurance();
+                                }else {
+                                    Toast.makeText(ChooseInformationActivity.this, "提交成功", Toast.LENGTH_LONG).show();
+                                    finish();
+                                    dialog.dismiss();
+                                }
                             }
                         });
                     } else {
@@ -247,16 +255,88 @@ public class ChooseInformationActivity extends AppCompatActivity {
         }).start();
     }
 
-    @Override
-    public void onBackPressed() {
-        if ((System.currentTimeMillis() - mLastBackTime) < 2000) {
-            setResult(1);
-            finish();
-        } else {
-            mLastBackTime = System.currentTimeMillis();
-            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+    //获取保险
+    private void getInsurance() {
+        if (DeviceUtil.IsNetWork(this) == false) {
+            Toast.makeText(this, "网络未连接", Toast.LENGTH_SHORT).show();
+            return;
         }
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String URL = Constants.URL1;
+                String nameSpace = Constants.nameSpace;
+                String method_Name = "PushDataInsurance";
+                String SOAP_ACTION = nameSpace + method_Name;
+                SoapObject rpc = new SoapObject(nameSpace, method_Name);
+                rpc.addProperty("sXjdId", MyApplication.userId);
+                rpc.addProperty("sTel", MyApplication.phone);
+                HttpTransportSE transport = new HttpTransportSE(URL);
+                transport.debug = true;
+                SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+                envelope.bodyOut = rpc;
+                envelope.dotNet = true;
+                envelope.setOutputSoapObject(rpc);
+                try {
+                    transport.call(SOAP_ACTION, envelope);
+                    SoapObject object = (SoapObject) envelope.bodyIn;
+                    String result = object.getProperty("PushDataInsuranceResult").toString();
+                    if (!TextUtils.isEmpty(result) && result.startsWith("0")) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                dialog.dismiss();
+                                finish();
+                                //展示保险信息
+//                                showInsuranceTip();
+                            }
+                        });
+                    }
+
+                } catch (Exception e) {
+                }
+            }
+        }).start();
     }
+
+    //保险弹出框
+    /*
+     *
+     *
+     * 弹出对话框的步骤 1.创建alertDialog的builder. 2.要给builder设置属行, 对话框的内容,样式,按钮
+     * 3.通过builder 创建个对话框 4.对话框show()出来
+     */
+    protected void showInsuranceTip() {
+        alertDialog = new AlertDialog.Builder(this, R.style.CustomDialog).create();
+        alertDialog.setCancelable(false);
+        alertDialog.setCanceledOnTouchOutside(false);
+        /**
+         * 下面三行可以让对话框里的输入框可以输入
+         */
+        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        RelativeLayout layout = (RelativeLayout) inflater.inflate(R.layout.insurance_tip, null);
+        alertDialog.setView(layout);
+
+        alertDialog.show();
+        Window window = alertDialog.getWindow();
+        window.setContentView(R.layout.insurance_tip);
+//        ivVerify = (ImageView) window.findViewById(R.id.verify_iv);
+//        etVerify = (EditText) window.findViewById(R.id.verify_et);
+//        Button btn = (Button) window.findViewById(R.id.verify_btn);
+//        ivVerify.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                initYanzheng();
+//            }
+//        });
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sendCode();
+//            }
+//        });
+    }
+
 
     public void onResume() {
         super.onResume();

@@ -49,6 +49,7 @@
             android:windowSoftInputMode="adjustPan" />
         <activity android:name=".activity.GuideActivity" />
         <activity android:name=".activity.ChooseInformationActivity" />
+        <activity android:name=".activity.WebViewTitleActivity"></activity>
         //下载 针对7.0添加代码
         <service android:name=".biz.update.UpdateService" />
 
@@ -77,13 +78,10 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="Ge9gb2GS5napyh3GL012fHy8gQAlQNRI"></meta-data>
-
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
-
-        <activity android:name=".activity.WebViewTitleActivity"></activity>
     </application>
 
 </manifest>
