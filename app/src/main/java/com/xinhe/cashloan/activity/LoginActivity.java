@@ -200,7 +200,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "请输入手机号", Toast.LENGTH_LONG).show();
                     } else if (TextUtils.isEmpty(savePhone)) {
                         seekBar.setProgress(0);
-                        Toast.makeText(LoginActivity.this, "请获取验证码验证", Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "请先验证", Toast.LENGTH_LONG).show();
                     } else if (loginCb.isChecked()) {
                         if (isNewUser) {
                             login();
@@ -604,7 +604,7 @@ public class LoginActivity extends AppCompatActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(LoginActivity.this, "发送失败", Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this, "验证失败", Toast.LENGTH_LONG).show();
                                 dialog.dismiss();
                             }
                         });
@@ -614,7 +614,7 @@ public class LoginActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(LoginActivity.this, "发送失败", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "验证失败", Toast.LENGTH_LONG).show();
                             dialog.dismiss();
                         }
                     });

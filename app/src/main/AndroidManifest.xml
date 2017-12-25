@@ -39,7 +39,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity android:name=".activity.WebViewActivity" />
         <activity android:name=".activity.ProductListActivity" />
         <activity android:name=".activity.ProductDetailsActivity" />
@@ -74,6 +75,7 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="self" />
+
         //百度定位
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"

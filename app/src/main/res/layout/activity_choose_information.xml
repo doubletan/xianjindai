@@ -331,7 +331,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="申请有礼，送最高100万保额意外险一份"
+            android:text="申请有礼，送最高100万出行意外安全保险一份"
             android:textColor="@color/text_color_66"
             android:textSize="@dimen/size_12" />
     </LinearLayout>
