@@ -155,6 +155,8 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/length_5"
+                    android:paddingRight="@dimen/length_5"
                     >
                     <SeekBar
                         android:id="@+id/login_sb"

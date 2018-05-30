@@ -103,7 +103,6 @@ public class ProductDetailsActivity extends Activity implements OnClickListener 
             barLl.setVisibility(View.VISIBLE);
             LinearLayout.LayoutParams ll = (LinearLayout.LayoutParams) barLl.getLayoutParams();
             ll.height = Utill.getStatusBarHeight(this);
-            ll.width = RelativeLayout.LayoutParams.MATCH_PARENT;
             barLl.setLayoutParams(ll);
         }
         initActionBar();

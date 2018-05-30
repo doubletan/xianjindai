@@ -18,7 +18,7 @@ public class Constants {
     //注册渠道
     public static String channel = "Android-现金贷";
     //注册渠道1
-    public static String channel1 = "vivo";
+    public static String channel1 = "yingyongbao6";
     //App名称
     public static String appName = "现金贷";
     //公司名字

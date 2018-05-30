@@ -74,7 +74,7 @@
             android:value="57870cbb67e58e332a000858" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="self" />
+            android:value="yingyongbao6" />
 
         //百度定位
         <meta-data

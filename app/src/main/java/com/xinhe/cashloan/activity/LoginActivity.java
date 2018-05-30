@@ -305,7 +305,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         //身份证号
         myID = loginIDEt.getText().toString().trim();
-        if (TextUtils.isEmpty(etYanZhengCode)) {
+        if (TextUtils.isEmpty(myID)) {
             Toast.makeText(this, "请输入您的身份证号", Toast.LENGTH_LONG).show();
             return;
         }
